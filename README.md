@@ -1,6 +1,6 @@
 ﻿# 🏡 MLS Housing Market Analytics Pipeline
 
-## 📌 Overview
+## Overview
 
 This project analyzes residential Multiple Listing Service (MLS) housing transaction data to generate market intelligence, competitive insights, and interactive business dashboards. Using **Python, Pandas, and Tableau**, the project transforms raw real estate transaction data into actionable insights on housing prices, inventory trends, market activity, and agent performance.
 
