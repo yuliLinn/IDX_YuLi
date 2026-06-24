@@ -129,16 +129,20 @@ Built Tableau dashboards covering:
 
 ## Key Skills Demonstrated
 
-- Data Cleaning
+- Data Aggregation, Validation, and Cleaning
+- Public API Integration (FRED)
 - Exploratory Data Analysis (EDA)
+- Datetime Processing & Join Key Creation
+- Data Merging with External Economic Indicators
+- Merge Verification & Null-Check Validation
 - Feature Engineering
 - Time Series Analysis
 - Statistical Outlier Detection
-- API Data Integration
+- Dataset Reliability Improvement & Quality Assurance
 - Data Visualization
 - Business Intelligence
-- Real Estate Market Analytics
 - Dashboard Development
+- Real Estate Market Analytics
 
 ---
 
