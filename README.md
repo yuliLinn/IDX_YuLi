@@ -28,13 +28,13 @@ Due to MLS licensing and confidentiality restrictions, the underlying real estat
 
 ## 🗂️ Dataset
 
-### 🏠 MLS Transaction Data
+### MLS Transaction Data
 - Residential property listings
 - Residential property sales
 - January 2024 – Present
 - Millions of transaction records
 
-### 📈 Economic Data
+### Economic Data
 - 30-Year Fixed Mortgage Rate (MORTGAGE30US)
 - Source: Federal Reserve Economic Data (FRED)
 
