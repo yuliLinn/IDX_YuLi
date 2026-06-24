@@ -1,4 +1,4 @@
-﻿# 🏡 MLS Housing Market Analytics Pipeline
+# 🏡 MLS Housing Market Analytics Pipeline
 
 ## Overview
 
