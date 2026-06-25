@@ -52,7 +52,7 @@ Due to MLS licensing and confidentiality restrictions, the underlying real estat
 
 ---
 
-## Project Workflow
+## Project Workflow (.IPYNB)
 
 ### 1. Data Aggregation
 - Combined monthly MLS listing and sold datasets
@@ -124,6 +124,8 @@ Built Tableau dashboards covering:
 - Zip Code Heat Maps
 - Agent Performance Rankings
 - Brokerage Performance Rankings
+
+*This project is also broken down into seperate .py and twbx files listed 1-12
 
 ---
 
