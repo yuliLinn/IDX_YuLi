@@ -52,7 +52,7 @@ Due to MLS licensing and confidentiality restrictions, the underlying real estat
 
 ---
 
-## Project Workflow (.IPYNB)
+## Project Workflow (MLS_project_yuliLinn.ipynb)
 
 ### 1. Data Aggregation
 - Combined monthly MLS listing and sold datasets
