@@ -17,13 +17,14 @@ sold["PropertyType"].value_counts()
 
 #### Focusing on residential properties, including:
     # - "Residential": standard homes intended for owner-occupany
+# All properties for lease or bought as finanical investment for rental income were excluded for consistency of analysis of closing prices.
     # - "ResidentialLease": residential properties offered for rent
     # - "ResidentialIncome": multi-unit residential properties purchased primarily for rental income
 # Chose to focus on traditional residential home sales and excluded "ManufacturedInPark" homes (mobile homes) located in mobile home parks 
 # Differ in terms of ownership structure, financing, depreciation, and market dyanmics.
 # Since  mix mobil/manufactured homes and traditional site-built residential represent fundamentally different asset classes analyzing them together can severely skew metrics.
 # After filtering, the new dataset for sales of traditional, residential homes decreases from 681599 to 632055.
-sold_resid = sold[sold["PropertyType"].isin(["Residential", "ResidentialLease", "ResidentialIncome"])]
+sold_resid = sold[sold["PropertyType"] == "Residential"]
 
 # Validating completness for sold data
 null_report_sold = pd.DataFrame({
@@ -64,7 +65,7 @@ list.head()
 list["PropertyType"].value_counts()
 
 # Applying same residential classification and filter to listing data
-list_resid = list[list["PropertyType"].isin(["Residential", "ResidentialLease", "ResidentialIncome"])]
+list_resid = list[list["PropertyType"] == "Residential"]
 
 # Validate completeness for listing data
 null_report_list = pd.DataFrame({
