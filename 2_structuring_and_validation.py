@@ -31,6 +31,7 @@ null_report_sold = pd.DataFrame({
     "Null Count": sold_resid.isnull().sum(),
     "Null %": (sold_resid.isnull().sum() / len(sold_resid) * 100).round(2)
 })
+
 null_report_sold["Flag (>90% null)"] = null_report_sold["Null %"] > 90
 null_report_sold = null_report_sold.sort_values("Null %", ascending=False)
 null_report_sold
@@ -72,14 +73,17 @@ null_report_list = pd.DataFrame({
     "Null Count": list_resid.isnull().sum(),
     "Null %": (list_resid.isnull().sum() / len(list_resid) * 100).round(2)
 })
+
 null_report_list["Flag (>90% null)"] = null_report_list["Null %"] > 90
 null_report_list = null_report_list.sort_values("Null %", ascending=False)
 null_report_list
 
 # Apply same logic as sold of dropping columns w/ >90% missing values
+# Drop duplicate columns, ended with ".1"
 # Did not drop observations with missing closing price as that is natural for listed property to not be sold
 drop_cols_list = null_report_list[null_report_list["Flag (>90% null)"]].index
 list_resid = list_resid.drop(columns=drop_cols_list)
+list_resid = list_resid.drop(columns=list_resid.columns[list_resid.columns.str.contains(r'\.1')])
 
 # Numeric distribution summary, Listing (min, max, mean, median, percentiles) for ClosePrice, LivingArea, and DaysOnMarket
 cols = ['ClosePrice', 'LivingArea', 'DaysOnMarket']

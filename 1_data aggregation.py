@@ -32,12 +32,13 @@ list26 = pd.read_csv("CRMLSListing202602.csv")
 list27 = pd.read_csv("CRMLSListing202603.csv")
 list28 = pd.read_csv("CRMLSListing202604.csv")
 list29 = pd.read_csv("CRMLSListing202605.csv", encoding="cp1252")
+list30 = pd.read_csv("CRMLSListing202606.csv", encoding="cp1252")
 
 #concatenate listing data
-list = pd.concat([globals()[f'list{i}'] for i in range(1, 30)], ignore_index=True)
+list = pd.concat([globals()[f'list{i}'] for i in range(1, 31)], ignore_index=True)
 
 #validate number of observations before and after concatenation for listing
-rows_list_pre = sum(len(globals()[f'list{i}']) for i in range(1, 30))
+rows_list_pre = sum(len(globals()[f'list{i}']) for i in range(1, 31))
 rows_list_post = len(list)
 print(f"Before: {rows_list_pre:,} | After: {rows_list_post:,}")
 
@@ -81,12 +82,13 @@ sold29 = pd.read_csv("CRMLSSold202602.csv")
 sold30 = pd.read_csv("CRMLSSold202603.csv")
 sold31 = pd.read_csv("CRMLSSold202604.csv")
 sold32 = pd.read_csv("CRMLSSold202605.csv", encoding="cp1252")
+sold33 = pd.read_csv("CRMLSSold202606.csv", encoding="cp1252")
 
 # concatenate all sold data
-sold = pd.concat([globals()[f'sold{i}'] for i in range(1, 33)], ignore_index=True)
+sold = pd.concat([globals()[f'sold{i}'] for i in range(1, 34)], ignore_index=True)
 
 #validate number of observations before and after concatenation for sold
-rows_sold_pre = sum(len(globals()[f'sold{i}']) for i in range(1, 33))
+rows_sold_pre = sum(len(globals()[f'sold{i}']) for i in range(1, 34))
 rows_sold_post = len(sold)
 print(f"Before: {rows_sold_pre:,} | After: {rows_sold_post:,}")
 
