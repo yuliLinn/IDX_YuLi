@@ -1,8 +1,8 @@
 
-# imports
+#imports
 import pandas as pd
 
-# import all listing data
+#import all listing data
 list1 = pd.read_csv("CRMLSListing202401.csv")
 list2 = pd.read_csv("CRMLSListing202402.csv")
 list3 = pd.read_csv("CRMLSListing202403.csv")
@@ -34,22 +34,21 @@ list28 = pd.read_csv("CRMLSListing202604.csv")
 list29 = pd.read_csv("CRMLSListing202605.csv", encoding="cp1252")
 list30 = pd.read_csv("CRMLSListing202606.csv", encoding="cp1252")
 
-#concatenate listing data
+#Concatenate listing data
 list = pd.concat([globals()[f'list{i}'] for i in range(1, 31)], ignore_index=True)
 
-#validate number of observations before and after concatenation for listing
+#Validate number of observations before and after concatenation for listing
 rows_list_pre = sum(len(globals()[f'list{i}']) for i in range(1, 31))
 rows_list_post = len(list)
 print(f"Before: {rows_list_pre:,} | After: {rows_list_post:,}")
 
-
-# apply residential filter to listing data and save as new CSV file
+#Apply residential filter to listing data and save as new CSV file
 list_resid = list[list["PropertyType"] == "Residential"]
 print(f"(Listing) Before: {len(list):,} | After: {len(list_resid):,}")
 
 
 
-# import all sold data
+#import all sold data
 sold1 = pd.read_csv("CRMLSSold202401_filled.csv").drop(columns = ["latfilled", "lonfilled"])
 sold2 = pd.read_csv("CRMLSSold202401.csv")
 sold3 = pd.read_csv("CRMLSSold202402.csv")
@@ -84,20 +83,19 @@ sold31 = pd.read_csv("CRMLSSold202604.csv")
 sold32 = pd.read_csv("CRMLSSold202605.csv", encoding="cp1252")
 sold33 = pd.read_csv("CRMLSSold202606.csv", encoding="cp1252")
 
-# concatenate all sold data
+#Concatenate all sold data
 sold = pd.concat([globals()[f'sold{i}'] for i in range(1, 34)], ignore_index=True)
 
-#validate number of observations before and after concatenation for sold
+#Validate number of observations before and after concatenation for sold
 rows_sold_pre = sum(len(globals()[f'sold{i}']) for i in range(1, 34))
 rows_sold_post = len(sold)
 print(f"Before: {rows_sold_pre:,} | After: {rows_sold_post:,}")
 
-# apply residential filter to listing data and save as new CSV file
+#Apply residential filter to listing data and save as new CSV file
 sold_resid = sold[sold["PropertyType"] == "Residential"]
 print(f"(Sold) Before:{len(sold):,} | After: {len(sold_resid):,}")
 
 
-
-# save filtered as csv files
+#Save filtered as csv files
 list_resid.to_csv("week1_list_resid.csv", index=False)
 sold_resid.to_csv("week1_sold_resid.csv", index=False)
