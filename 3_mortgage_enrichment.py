@@ -10,7 +10,7 @@ mortgage
 
 #Resampling weekly rates to monthly averages
 mortgage['year_month'] = mortgage['date'].dt.to_period('M')
-mortgage_monthly = (mortgage.groupby('year_month')['rate_30yr_fixed'].mean().reset_index())
+mortgage_monthly = mortgage.groupby('year_month')['rate_30yr_fixed'].mean().reset_index()
 
 #### Create matching year_month key on MLS datasets
 #Sold dataset — key off CloseDate
