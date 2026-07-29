@@ -78,6 +78,8 @@ print(f"Rows before: {rows_before:,}")
 print(f"Rows after: {rows_after:,}")
 print(f"Rows removed: {rows_before - rows_after:,}")
 
+#-------------
+
 ##Geographic data checks
 #Flag records with missing coordinates
 sold_timely["missing_cords"] = (sold_timely["Latitude"] == 0) | sold_timely["Longitude"] == 0
@@ -173,11 +175,53 @@ print(f"Rows before: {rows_before:,}")
 print(f"Rows after: {rows_after:,}")
 print(f"Rows removed: {rows_before - rows_after:,}")
 
+##Adding school district mapping
+#Import for Califlorina school distric data
+import geopandas as gpd
 
-##Final sweep to remove unnecessart columns
-#Removing unnecessary columns for sold and listing data
-sold_clean = sold_clean.drop(columns=["BuyerAgencyCompensationType"])
-list_clean = list_clean.drop(columns=["BuyerAgencyCompensationType"])
+school_district = gpd.read_file("DistrictAreas2526.geojson")
+
+#Keep only unified school districts
+school_unified = school_district[school_district["DistrictType"] == "Unified"].copy()
+
+#Convert sold dataset to GeoDataFrame
+sold_geo = gpd.GeoDataFrame(sold_geo, geometry=gpd.points_from_xy(sold_geo["Longitude"], sold_geo["Latitude"]), crs="EPSG:4326")
+school_unified = school_unified.to_crs(sold_geo.crs)
+
+#Spatial join and add resulting DistrictName as new column: "DistrictName"
+sold_geo = gpd.sjoin(sold_geo, school_unified[["DistrictName", "geometry"]], how="left", predicate="within")
+sold_geo = sold_geo.drop(columns="index_right")
+
+#Number of unmatched listing properties
+sold_geo["DistrictName"].isna().sum()
+
+#Repeat for lising data
+list_geo = gpd.GeoDataFrame(list_geo, geometry=gpd.points_from_xy(list_geo["Longitude"], list_geo["Latitude"]), crs="EPSG:4326")
+school_unified = school_unified.to_crs(list_geo.crs)
+
+list_geo = gpd.sjoin(list_geo, school_unified[["DistrictName", "geometry"]], how="left", predicate="within")
+list_geo = list_geo.drop(columns="index_right")
+
+#Number of unmatched listing properties
+list_geo["DistrictName"].isna().sum()
+
+#-------------
+
+##Final sweep to remove unnecessary columns
+#Summary of nan of sold
+nan_percent = (sold_clean.isna().mean() * 100).round(2).sort_values(ascending=False)
+print(nan_percent[nan_percent > 50])
+
+#Summary of nan of listing
+nan_percent = (list_clean.isna().mean() * 100).round(2).sort_values(ascending=False)
+print(nan_percent[nan_percent > 50])
+
+#Removing unnecessary columns for sold and listing data, based on relevancy to market analysis and data availability
+drop_sold = ["BuyerAgencyCompensationType"]
+drop_list = ["BuyerAgencyCompensationType", "BuyerOfficeAOR"]
+
+sold_clean = sold_clean.drop(columns=drop_sold)
+list_clean = list_clean.drop(columns=drop_list)
 
 #Remove flagging columns
 sold_clean = sold_clean.drop(columns=["listing_after_close_flag", "purchase_after_close_flag", "negative_timeline_flag", "missing_cords", "invalid_cords"])
@@ -199,6 +243,7 @@ print(f"Rows before: {len(listing_with_rates):,}")
 print(f"Rows after: {len(list_clean):,}")
 print(f"Rows removed: {len(listing_with_rates) - len(list_clean):,}")
 
+#-------------
 
 #Save cleaned datasets as new CSVs
 sold_clean.to_csv("w4_sold_clean.csv", index=False)
