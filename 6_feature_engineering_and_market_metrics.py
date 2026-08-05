@@ -7,6 +7,9 @@ df_sold = pd.read_csv("w4_sold_clean.csv", low_memory=False)
 df_listing = pd.read_csv("w4_listing_clean.csv", low_memory=False)
 
 #Convert date fields to datetime format
+sold_with_rates = pd.read_csv("w3_sold_fred.csv")
+listing_with_rates = pd.read_csv("w3_list_fred.csv")
+
 date_columns = ["CloseDate", "PurchaseContractDate", "ListingContractDate", "ContractStatusChangeDate"]
 
 df_sold[date_columns] = sold_with_rates[date_columns].apply(pd.to_datetime)
@@ -66,7 +69,7 @@ def segment_analysis(df, segment_col):
         .sort_values("count", ascending=False)
     )
 
-#Apply to sold and listing data
+# Apply to sold and listing data
 datasets = {"sold": df_sold, "listing": df_listing}
 
 segments = [
@@ -78,19 +81,14 @@ segments = [
     "BuyerOfficeName"
 ]
 
-#Create new df for each segment
+# Create a summary DataFrame for each segment
 #EX. sold/listing_propertytype_analysis
-for name, df in {"sold": df_sold, "listing": df_listing}.items():
-    for segment in [
-        "PropertyType",
-        "PropertySubType",
-        "CountyOrParish",
-        "MLSAreaMajor",
-        "ListOfficeName",
-        "BuyerOfficeName"
-    ]:
+for name, df in datasets.items():
+    for segment in segments:
         if segment in df.columns:
             globals()[f"{name}_{segment.lower()}_analysis"] = segment_analysis(df, segment)
+
+
 
 #Sample summary table of offices (competitve intelligence)
 sold_listofficename_analysis.head(10)
