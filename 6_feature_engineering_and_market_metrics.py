@@ -67,7 +67,7 @@ def segment_analysis(df, segment_col):
             avg_contract_to_close_days=("contract_to_close_days", "mean")
         )
         .sort_values("count", ascending=False)
-    )
+    ).reset_index()
 
 # Apply to sold and listing data
 datasets = {"sold": df_sold, "listing": df_listing}
