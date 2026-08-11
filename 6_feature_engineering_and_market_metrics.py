@@ -52,6 +52,10 @@ listing_key_metrics = df_listing[key_metrics]
 print("Listing")
 display(listing_key_metrics.head())
 
+#Save key metrics into datasets as new CSVs
+df_sold.to_csv("w6_sold_KeyMetrics.csv", index=False)
+df_listing.to_csv("w6_listing_KeyMetrics.csv", index=False)
+
 
 ##Segmented Analysis
 #Function to group analysis by key functions
