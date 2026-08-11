@@ -74,9 +74,11 @@ print(f"Listing {listing_remove["ClosePrice"].quantile(0.5):,}")
 #Boxplot with outliers
 outlier = plt.boxplot(df_sold["ClosePrice"].dropna(), vert=False)
 outlier = plt.title("ClosePrice with outliers")
+outlier = plt.xlabel("in billion $")
 outlier
 
 #Boxplot without outliers
 remove = plt.boxplot(sold_remove["ClosePrice"].dropna(), vert=False)
 remove = plt.title("ClosePrice without outliers")
+remove = plt.xlabel("in million $")
 remove
