@@ -26,7 +26,7 @@ Due to MLS licensing and confidentiality restrictions, the underlying real estat
 
 ---
 
-## 🗂️ Dataset
+## Dataset
 
 ### MLS Transaction Data
 - Residential property listings
