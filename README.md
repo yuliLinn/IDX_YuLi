@@ -146,36 +146,6 @@ Built Tableau dashboards covering:
 - Dashboard Development
 - Real Estate Market Analytics
 
----
-
-├──.gitignore
-│    └── Specifies files and data excluded from version control (no csv or geojson files)
-│ 
-├── 1_data_aggregation.py
-│   └── Aggregates and combines the raw MLS data
-│
-├── 2_structuring_and_validation.py
-│   └── Structures the dataset and performs initial validation, shift focus to residential properties
-│
-├── 3_mortgage_enrichment.py
-│   └── Adds mortgage and FRED-related data for additional market context
-│
-├── 4-5_data_cleaning_and_prep.py
-│   └── Cleans, filters, and prepares data, incorporating geographical data checks and school district mapping
-│
-├── 6_feature_engineering_and_market_metrics.py
-│   └── Creates key housing market metrics
-│
-├── 7_outliers_and_data_quality.py
-│   └── Identifies outliers and performs final data quality checks
-│
-├── MLS_project_yulilinn.ipynb
-│   └── Main notebook aggregating .py files 1-7
-│
-└── README.md
-    └── Project documentation and overview
----
-
 ## Data Availability & MLS Disclaimer
 
 Note: The MLS datasets used for this project are not included in this repository.
